@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var emojis = ["🚗", "🚙", "🚕", "🚓", "🚌", "🚎", "🏎", "🚑", "🚒", "🚐", "🚚", "🛻", "🚛", "🚜", "🛺", "🛴", "🚲", "🛵", "🏍", "🚃"].shuffled()
+    @State var emojis = ["🚗", "🚙", "🚕", "🚓", "🚌", "🚎",
+                         "🏎", "🚑", "🚒", "🚐", "🚚", "🛻",
+                         "🚛", "🚜", "🛺", "🛴", "🚲", "🛵",
+                         "🏍", "🚃"]
     @State var emojiCount = 16
     
     var body: some View {
@@ -16,9 +19,10 @@ struct ContentView: View {
             HStack {
                 GameTitle()
             }
+            
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                    ForEach(emojis[0..<emojis.count], id: \.self) { emoji in
+                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
                         CardView(content: emoji)
                             .aspectRatio(2/3, contentMode: .fit)
                     }
@@ -26,10 +30,12 @@ struct ContentView: View {
             }
             .foregroundColor(.red)
             
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 75))]) {
-                theme1
-                theme2
-                theme3
+            Spacer()
+            
+            LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
+                theme1.aspectRatio(3/2, contentMode: .fill)
+                theme2.aspectRatio(3/2, contentMode: .fill)
+                theme3.aspectRatio(3/2, contentMode: .fill)
             }
             .padding(.horizontal)
         }
@@ -38,7 +44,11 @@ struct ContentView: View {
     
     var theme1: some View {
         Button {
-            emojis =  ["🚗", "🚙", "🚕", "🚓", "🚌", "🚎", "🏎", "🚑", "🚒", "🚐", "🚚", "🛻", "🚛", "🚜", "🛺", "🛴", "🚲", "🛵", "🏍", "🚃"].shuffled()
+            emojis =  ["🚗", "🚙", "🚕", "🚓", "🚌", "🚎",
+                       "🏎", "🚑", "🚒", "🚐", "🚚", "🛻",
+                       "🚛", "🚜", "🛺", "🛴", "🚲", "🛵",
+                       "🏍", "🚃"].shuffled()
+            emojiCount = Int.random(in: 1...emojis.count)
         } label: {
             VStack {
                 Image(systemName: "car").font(.largeTitle)
@@ -49,7 +59,9 @@ struct ContentView: View {
     
     var theme2: some View {
         Button {
-            emojis = ["😀", "😃", "🤣", "🥲", "😉", "😌", "😚", "😋", "🧐", "🤓"].shuffled()
+            emojis = ["😀", "😃", "🤣", "🥲", "😉", "😌",
+                      "😚", "😋", "🧐", "🤓"].shuffled()
+            emojiCount = Int.random(in: 1...emojis.count)
         } label: {
             VStack {
                 Image(systemName: "smiley").font(.largeTitle)
@@ -60,7 +72,9 @@ struct ContentView: View {
     
     var theme3: some View {
         Button {
-            emojis = ["🌪", "🌈", "☀️", "🌤", "⛅️", "🌥", "☁️", "🌦", "🌧", "🌨"].shuffled()
+            emojis = ["🌪", "🌈", "☀️", "🌤", "⛅️", "🌥",
+                      "☁️", "🌦", "🌧", "🌨"].shuffled()
+            emojiCount = Int.random(in: 1...emojis.count)
         } label: {
             VStack {
                 Image(systemName: "cloud.sun.rain").font(.largeTitle)
@@ -69,29 +83,27 @@ struct ContentView: View {
         }
     }
     
-    
-    
-    var add: some View {
+//    var add: some View {
 //      Option 1
-        Button(action: {
-            if emojiCount < emojis.count {
-                emojiCount += 1
-            }
-        }, label: {
-            Image(systemName: "plus.circle")
-        })
-    }
+//        Button(action: {
+//            if emojiCount < emojis.count {
+//                emojiCount += 1
+//            }
+//        }, label: {
+//            Image(systemName: "plus.circle")
+//        })
+//    }
     
-    var remove: some View {
+//    var remove: some View {
 //      Option 2
-        Button {
-            if emojiCount > 1 {
-                emojiCount -= 1
-            }
-        } label: {
-            Image(systemName: "minus.circle")
-        }
-    }
+//        Button {
+//            if emojiCount > 1 {
+//                emojiCount -= 1
+//            }
+//        } label: {
+//            Image(systemName: "minus.circle")
+//        }
+//    }
 }
 
 struct GameTitle: View {
